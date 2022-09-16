@@ -1,0 +1,2 @@
+# metag_Pipeline
+This pipeline evaluates the quality of genomic data before and after trimming and aligns the quality data to a target genome. This allows for the visualization communities within a sample, which is important to metagenomic analysis. Within the pipeline, several programs are used and therefore must be preloaded for the code to work. The programs used include: FastQC, MultiQC, Trimmomatic, Burrows-Wheeler Aligner (BWA), samtools, and Kraken2. 
