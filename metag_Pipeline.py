@@ -169,7 +169,7 @@ print("Done with final round of FASTQC")
 do_Multiqc(Multiqc_dir, "Post_Trim", PE)
 
 ### PAUSE pipeline to verify trimming was completed correctly
-print("!!! The program has been paused. Please check the quality of your data by opening a new terminal tab and typing: open post_trim_Multiqc_multiqc_report.html. Come back to this tab to continue running this pipeline OR edit the 'steps' in the congfig_file.")
+print("!!! The program has been paused. Please check the quality of your data by opening a new terminal tab and typing: open post_trim_Multiqc_multiqc_report.html. Come back to this tab to continue running this pipeline OR edit the 'steps' in the parameter_file.")
 pause()
 
 ########################## ALIGNMENT AND EXTRACTION ###########################
