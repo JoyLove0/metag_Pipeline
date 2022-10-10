@@ -46,12 +46,10 @@ QC_threads = param["QC_threads"]
 steps = param["steps"]
 stem = param["stem"] #has to be Raw_data directory
 filenames = param["filenames"]
-trimmed_filenames = param["trimmed_filenames"]
 ali_threads = param["ali_threads"]
 genome_path = param["genome_path"]
 samtools_threads = param["samtools_threads"]
 database_path = param["database_path"]
-unmapped_filenames = param["unmapped_filenames"]
 kraken_threads = param["kraken_threads"]
 #Double check variables
 print("-------------------------------------------CHECK YOUR VARIABLES--------------------------------------------")
@@ -59,13 +57,11 @@ print("Thread for Fastqc and Multiqc:", QC_threads,
       "Steps", steps,
       "The stem:", stem,
       "Filenames:", filenames,
-      "Trimmed Filenames:", trimmed_filenames,
       "Threads for bwa:", ali_threads,
       "Pathway to Reference Genome:", genome_path,
       "Threads for samtools:", samtools_threads,
       "Pathway to Database:", database_path,
-      "Threads for Kraken:", kraken_threads, 
-      "Unmapped Filenames:", unmapped_filenames)
+      "Threads for Kraken:", kraken_threads)
 ## Directory Variables
 #This code creates the nessecary directories if they don't already exist
 checkpoint = (os.path.exists(stem + "/PE"),
@@ -183,7 +179,7 @@ os.chdir(PE) #Change the current working directory
 pwd = os.getcwd() #Get the current working directory
 print("Current working directory:", pwd) #Print the current working directory
 #This code aligns trimmed reads to a provided genome using bwa mem
-file = open(trimmed_filenames)
+file = open("trimmed.file.names")
 for line in file:
     a = line.split("R1")[0].strip()
     b = line.split("R1")[-1].strip()
