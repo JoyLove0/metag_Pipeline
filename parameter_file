@@ -1,11 +1,9 @@
 QC_threads = 
 steps = 
 stem = 
-filenames = 
-trimmed_filenames =
+filenames =
 ali_threads = 
 genome_path = 
 samtools_threads = 
 database_path = 
-unmapped_filenames = 
 kraken_threads = 
