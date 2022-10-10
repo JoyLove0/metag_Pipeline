@@ -1,0 +1,10 @@
+QC_threads = 
+steps = 
+stem = 
+filenames = 
+trimmed_filenames =
+ali_threads = 
+genome_path = 
+samtools_threads = 
+database_path = 
+kraken_threads = 
