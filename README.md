@@ -54,3 +54,4 @@ In order for this code to work this file MUST be called "parameter_file". The on
 | database_path    | This is the path to the directory where the database is. This needed for idenifying communities with KRAKEN2. An example is 64. |                                         
 | kraken_threads   | The number the user chooses will be used for KRAKEN2. An example of this is 10.|
 
+See the sample parameter file for more examples. 
