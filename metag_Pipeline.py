@@ -219,7 +219,7 @@ os.chdir(Alignment_dir) #Change the current working directory
 pwd = os.getcwd() #Get the current working directory
 print("Current working directory:", pwd) #Print the current working directory
 #This code identifies unmapped reads with Kraken
-file = open(unmapped_filenames)
+file = open("unmapped.filenames")
 for line in file:
     a = line.split("R1")[0].strip()
     b = line.split("R1")[-1].strip()
