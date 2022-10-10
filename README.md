@@ -40,6 +40,17 @@ Important: the user must index the reference genome before running metag_Pipelin
 Here is a link to the manuel for more information: https://bio-bwa.sourceforge.net/bwa.shtml
 
 ### Parameter File
-In order for this code to work this file MUST be called "parameter_file". The only things that should be modified are the words AFTER the equals sign. Make sure there is a space before and after the equals sign once you input your data. 
+In order for this code to work this file MUST be called "parameter_file". The only things that should be modified are the words AFTER the equals sign. Make sure there is a space before and after the equals sign once you input your data. The following table gives a brief explanation of each line in the parameter file.
 
-Also, note that the "stem" in the parameter file must be the directory that has your raw data. 
+| Option        | Details    |
+| ------------- | ------------- |
+| QC_threads       | The number the user chooses will be usef for FASTQC, TRIMMOMATIC, and MULTIQC. 10 is recommended. |
+| steps            | This option includes each "step" or option used for FASTQC. ILLUMINACLIP:adapters:2:30:10 SLIDINGWINDOW:4:15 AVGQUAL:20 MINLEN:100 is recommended.|
+| stem             | The is the working directory. Note that the "stem" in the parameter file must be the directory that has your raw data.   | 
+| filenames        | This is the name of the text file including a list of all the data files to be evaluated. Note, only the R1 files should be in the list.|
+| ali_threads      | The number the user chooses will be used for BWA. An example of this is 32. |                                       
+| genome_path      | This is the path to the directory where the reference genome is. This is needed for alignment. An example of this is: /home/dbs/mouse-genome/GCF_000001635.27_GRCm39_genomic.fna |
+| samtools_threads | This number the user chooses will be used for SAMTOOLS. An example of this is 64. | 
+| database_path    | This is the path to the directory where the database is. This needed for idenifying communities with KRAKEN2. An example is 64. |                                         
+| kraken_threads   | The number the user chooses will be used for KRAKEN2. An example of this is 10.|
+
