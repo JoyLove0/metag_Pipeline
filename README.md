@@ -11,10 +11,14 @@ See the figure below for a summary:
 
 # Included Tools and Packages
 This tool comes in four parts: 
-`	1. metag_Pipeline.py 
+1. James Madison
+2. James Monroe
+3. John Quincy Adams
+
+	1. metag_Pipeline.py 
 	2. help_me.py
 	3. parameter_file
-	4. sample.parameter.file `
+	4. sample.parameter.file 
  
 # Dependecies
 This pipeline requires Python, FASTQC, Trimmomatic, bwa, samtools, bedtools, seqtk, and kraken2 to be installed in order to run. The environment.yml file contains the conda environment recipe that includes these programs. The help_me.py file contain the option and/or of these programs.
