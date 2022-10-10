@@ -51,6 +51,7 @@ ali_threads = param["ali_threads"]
 genome_path = param["genome_path"]
 samtools_threads = param["samtools_threads"]
 database_path = param["database_path"]
+unmapped_filenames = param["unmapped_filenames"]
 kraken_threads = param["kraken_threads"]
 #Double check variables
 print("-------------------------------------------CHECK YOUR VARIABLES--------------------------------------------")
