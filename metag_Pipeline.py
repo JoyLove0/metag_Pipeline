@@ -63,7 +63,9 @@ print("Thread for Fastqc and Multiqc:", QC_threads,
       "Threads for bwa:", ali_threads,
       "Pathway to Reference Genome:", genome_path,
       "Threads for samtools:", samtools_threads,
-      "Pathway to Database:", database_path)
+      "Pathway to Database:", database_path,
+      "Threads for Kraken:", kraken_threads, 
+      "Unmapped Filenames:", unmapped_filenames)
 ## Directory Variables
 #This code creates the nessecary directories if they don't already exist
 checkpoint = (os.path.exists(stem + "/PE"),
