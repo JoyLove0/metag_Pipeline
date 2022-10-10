@@ -7,4 +7,5 @@ ali_threads = 32
 genome_path = /home/Genome.fna
 samtools_threads = 64
 database_path = /home/dbsl
+unmapped_filenames = unmapped.filenames
 kraken_threads = 10
