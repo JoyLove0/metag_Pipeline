@@ -49,7 +49,7 @@ In order for this code to work this file MUST be called "parameter_file". The on
 | QC_threads       | The number the user chooses will be usef for FASTQC, TRIMMOMATIC, and MULTIQC. 10 is recommended. |
 | steps            | This option includes each "step" or option used for FASTQC. ILLUMINACLIP:adapters:2:30:10 SLIDINGWINDOW:4:15 AVGQUAL:20 MINLEN:100 is recommended.|
 | stem             | The is the working directory. Note that the "stem" in the parameter file must be the directory that has your raw data.   | 
-| filenames        | This is the name of the text file including a list of all the data files to be evaluated. Note, only the R1 files should be in the list.|
+| filenames        | This is the name of the text file including a list of all the data files to be evaluated. Note, only the R1 files should be in the list. Also, note that this file must be in the stem directory.|
 | ali_threads      | The number the user chooses will be used for BWA. An example of this is 32. |                                       
 | genome_path      | This is the path to the directory where the reference genome is. This is needed for alignment. An example of this is: /home/dbs/mouse-genome/GCF_000001635.27_GRCm39_genomic.fna |
 | samtools_threads | This number the user chooses will be used for SAMTOOLS. An example of this is 64. | 
