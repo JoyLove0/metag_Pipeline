@@ -36,8 +36,6 @@ for line in file1:
     (key, value) = line.strip().split('=')
     param[key.strip()] = value.strip()
 file1.close()
-#Double check dictionary
-print("Parameters Dictionary:", param)
 
 ### Variables
 ## Paramter Variblaes
