@@ -9,6 +9,8 @@ See the figure below for a summary:
 
 `python metag_Pipeline.py`
 
+This program should take about 15 minutes.
+
 # Included Tools and Packages
 This tool comes in four parts: 
 1. metag_Pipeline.py 
@@ -33,7 +35,7 @@ For more information on each program, see the below:
 | Kraken2       | https://github.com/DerrickWood/kraken2/wiki/Manual                                                               |
 
 ### Genome Indexing
-Important: the user must index the reference genome before running metag_Pipeline.py. Use the command below. 
+Important: the user must index the reference genome before running metag_Pipeline.py. This will take several hour. Use the command below. 
 
 `bwa index -a bwtsw ref_genome.fa`
 
