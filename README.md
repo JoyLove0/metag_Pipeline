@@ -9,8 +9,6 @@ See the figure below for a summary:
 
 `python metag_Pipeline.py`
 
-This program should take about 15 minutes.
-
 # Included Tools and Packages
 This tool comes in four parts: 
 1. metag_Pipeline.py 
