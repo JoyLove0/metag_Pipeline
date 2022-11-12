@@ -157,6 +157,7 @@ subprocess.check_output(make_file, shell=True) #Making file from trimmed names
 #This code does fastqc on a list of file names
 file = open("trimmed.file.names")
 for line in file:
+    for line in file:
     do_FAStQC(line, post_t)
     do_FAStQC(x, post_t)
 print("Done with final round of FASTQC")
