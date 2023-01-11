@@ -13,8 +13,8 @@ import os
 ### Program Functions
 ## FASTQC function
 #This code creates a function that needs the path and output directory to do fastqc
-def do_FAStQC(fastq_path, output_dir, options=['-o',]):
-    command = "fastqc {} {} {}".format(' '.join(options), output_dir, fastq_path)
+def do_FAStQC(threads, fastq_path, output_dir, options=['-o',]):
+    command = "fastqc" + " -t " + threads + " {} {} {}".format(' '.join(options), output_dir, fastq_path)
     subprocess.check_call(command, shell=True)
 ## Multiqc function
 #This code creates a function that needs the path, output directory, and the title 
@@ -36,6 +36,8 @@ for line in file1:
     (key, value) = line.strip().split('=')
     param[key.strip()] = value.strip()
 file1.close()
+#Double check dictionary
+print("Parameters Dictionary:", param)
 
 ### Variables
 ## Paramter Variblaes
@@ -58,8 +60,7 @@ print("Thread for Fastqc and Multiqc:", QC_threads,
       "Threads for bwa:", ali_threads,
       "Pathway to Reference Genome:", genome_path,
       "Threads for samtools:", samtools_threads,
-      "Pathway to Database:", database_path,
-      "Threads for Kraken:", kraken_threads)
+      "Pathway to Database:", database_path)
 ## Directory Variables
 #This code creates the nessecary directories if they don't already exist
 checkpoint = (os.path.exists(stem + "/PE"),
@@ -126,8 +127,8 @@ print("-------------------------------------------------------------------------
 file = open(filenames)
 for line in file:
     x = line.replace("R1", "R2")
-    do_FAStQC(line, pre_t)
-    do_FAStQC(x, pre_t)
+    do_FAStQC(QC_threads, line, pre_t)
+    do_FAStQC(QC_threads, x, pre_t)
 print("Done with first round of FASTQC")
 
 ### Multiqc before Trimming
