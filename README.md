@@ -14,10 +14,13 @@ This tool comes in four parts:
 1. metag_Pipeline.py 
 2. help_me.py
 3. parameter_file
-4. sample.parameter.file 
+4. sample.parameter.file
+5. environment.yml
  
 # Dependecies
 This pipeline requires Python, FASTQC, Trimmomatic, bwa, samtools, bedtools, seqtk, and kraken2 to be installed in order to run. The environment.yml file contains the conda environment recipe that includes these programs. The help_me.py file contain the option and/or of these programs.
+
+Note that this pipeline was written in the Python version 3.6.10. For for more information about the versions of all of these dependecies check the environment.yml.
 
 For more information on each program, see the below:
 
