@@ -1,9 +1,7 @@
-QC_threads = 10
+threads = 24
 steps = ILLUMINACLIP:adapters:2:30:10 SLIDINGWINDOW:4:15 AVGQUAL:20 MINLEN:100
 stem = /home/Raw_Data_Directory
 filenames = sample.R1.file.names
-ali_threads = 32
+samtools_quaility = 20
 genome_path = /home/Genome.fna
-samtools_threads = 64
 database_path = /home/dbsl
-kraken_threads = 10
