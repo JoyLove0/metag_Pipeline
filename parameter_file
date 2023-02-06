@@ -1,9 +1,7 @@
-QC_threads = 
+threads = 
 steps = 
 stem = 
 filenames =
-ali_threads = 
+samtools_quality =  
 genome_path = 
-samtools_threads = 
 database_path = 
-kraken_threads = 
