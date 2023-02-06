@@ -42,24 +42,21 @@ print("Parameters Dictionary:", param)
 ### Variables
 ## Paramter Variblaes
 #This code uses the param dictionary to create variables
-QC_threads = param["QC_threads"]
+threads = param["threads"]
 steps = param["steps"]
 stem = param["stem"] #has to be Raw_data directory
 filenames = param["filenames"]
-ali_threads = param["ali_threads"]
 genome_path = param["genome_path"]
-samtools_threads = param["samtools_threads"]
+samtools_quality = param["samtools_quality"]
 database_path = param["database_path"]
-kraken_threads = param["kraken_threads"]
 #Double check variables
 print("-------------------------------------------CHECK YOUR VARIABLES--------------------------------------------")
-print("Thread for Fastqc and Multiqc:", QC_threads,
+print("Thread for Fastqc, Multiqc, BWA, Samtools, and Kraken:", threads,
       "Steps", steps,
       "The stem:", stem,
       "Filenames:", filenames,
-      "Threads for bwa:", ali_threads,
+      "Quality for samtools", samtools_quality,
       "Pathway to Reference Genome:", genome_path,
-      "Threads for samtools:", samtools_threads,
       "Pathway to Database:", database_path)
 ## Directory Variables
 #This code creates the nessecary directories if they don't already exist
@@ -127,8 +124,8 @@ print("-------------------------------------------------------------------------
 file = open(filenames)
 for line in file:
     x = line.replace("R1", "R2")
-    do_FAStQC(QC_threads, line, pre_t)
-    do_FAStQC(QC_threads, x, pre_t)
+    do_FAStQC(threads, line, pre_t)
+    do_FAStQC(threads, x, pre_t)
 print("Done with first round of FASTQC")
 
 ### Multiqc before Trimming
@@ -141,7 +138,7 @@ file = open(filenames)
 for line in file:
     a = line.split("R1")[0].strip()
     b = line.split("R1")[-1].strip()
-    trim_cmd = "trimmomatic PE -threads %s -phred33 %sR1%s %sR2%s %s/%strimmed_R1%s %s/%strimmed_U1%s %s/%strimmed_R2%s %s/%strimmed_U2%s %s" % (QC_threads, a, b, a, b, PE, a, b, U, a, b, PE, a, b, U, a, b, steps)
+    trim_cmd = "trimmomatic PE -threads %s -phred33 %sR1%s %sR2%s %s/%strimmed_R1%s %s/%strimmed_U1%s %s/%strimmed_R2%s %s/%strimmed_U2%s %s" % (threads, a, b, a, b, PE, a, b, U, a, b, PE, a, b, U, a, b, steps)
     print(a, b, trim_cmd)
     subprocess.call([trim_cmd], shell=True)
 print("Done with trimming.")
@@ -158,7 +155,6 @@ subprocess.check_output(make_file, shell=True) #Making file from trimmed names
 #This code does fastqc on a list of file names
 file = open("trimmed.file.names")
 for line in file:
-    for line in file:
     do_FAStQC(line, post_t)
     do_FAStQC(x, post_t)
 print("Done with final round of FASTQC")
@@ -168,7 +164,7 @@ print("Done with final round of FASTQC")
 do_Multiqc(Multiqc_dir, "Post_Trim", PE)
 
 ### PAUSE pipeline to verify trimming was completed correctly
-print("!!! The program has been paused. Please check the quality of your data by opening a new terminal tab and typing: open post_trim_Multiqc_multiqc_report.html. Come back to this tab to continue running this pipeline OR edit the 'steps' in the parameter_file.")
+print("!!! The program has been paused. Please check the quality of your data by opening a new terminal tab and typing: open post_trim_Multiqc_multiqc_report.html. Come back to this tab to continue running this pipeline OR edit the 'steps' in the congfig_file.")
 pause()
 
 ########################## ALIGNMENT AND EXTRACTION ###########################
@@ -184,9 +180,9 @@ for line in file:
     a = line.split("R1")[0].strip()
     b = line.split("R1")[-1].strip()
 #This code extracts the unmapped and mapped alignment files using samtools
-    unmapped_samtools_sort = "bwa mem -M -t %s %s %sR1%s %sR2%s | samtools view -@%s -b -f 4 -o %sunmapped%s.bam" % (QC_threads, genome_path, a, b, a, b, samtools_threads, a, b)
+    unmapped_samtools_sort = "bwa mem -M -t %s %s %sR1%s %sR2%s | samtools view -@%s -q %s -b -f 4 -o %sunmapped%s.bam" % (threads, genome_path, a, b, a, b, threads, samtools_quality, a, b)
     subprocess.call([unmapped_samtools_sort], shell=True)
-    mapped_samtools_sort = "bwa mem -M -t %s %s %sR1%s %sR2%s | samtools view -@%s -b -F 4 -o %smapped%s.bam" % (QC_threads, genome_path, a, b, a, b, samtools_threads, a, b)
+    mapped_samtools_sort = "bwa mem -M -t %s %s %sR1%s %sR2%s | samtools view -@%s -q %s -b -F 4 -o %smapped%s.bam" % (threads, genome_path, a, b, a, b, threads, samtools_quality, a, b)
 #This code converts the unmapped alignment files to fastqc files
     bam_to_fastqc = "bedtools bamtofastq -i %sunmapped%s.bam -fq %sunmapped_R1%s.fq" % (a, b, a, b)
     subprocess.call([bam_to_fastqc], shell=True)
@@ -199,7 +195,7 @@ for line in file:
 #This code makes a list of unmapped files in preparation for Kraken
 os.chdir(PE) #Change the current working directory
 pwd = os.getcwd() #Get the current working directory
-make_file2 = "ls *unmapped_R1* > unmapped.filenames" 
+make_file2 = "ls *R1* > unmapped.filenames" 
 subprocess.check_output(make_file2, shell=True) #Making file from unmapped names
 #This code manipulates the location of the alignment files to Alignment directory
 copy_file1 = "mv *bam %s" % (Alignment_dir)
@@ -219,6 +215,5 @@ file = open("unmapped.filenames")
 for line in file:
     a = line.split("R1")[0].strip()
     b = line.split("R1")[-1].strip()
-    kraken_cmd = "kraken2 --threads %s --db %s --paired --output %s/Kraken_Outputfile --report %s/Kraken_Report --use-name --use-mpa-style %sR1%s %sR2%s " % (kraken_threads, database_path, Kraken_dir, Kraken_dir, a, b, a, b)
+    kraken_cmd = "kraken2 --db %s --paired %sR1%s %sR2%s --threads %s --output %s/Kraken_Outputfile --report %s/Kraken_Report --use-name" % (database_path, a, b, a, b, threads, Kraken_dir, Kraken_dir)
     subprocess.check_output([kraken_cmd], shell=True)
-
