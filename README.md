@@ -50,9 +50,9 @@ In order for this code to work this file MUST be called "parameter_file". The on
 | threads          | The number the user chooses will be use for all steps. 24 is recommended. |
 | steps            | This option includes each "step" or option used for FASTQC. ILLUMINACLIP:adapters:2:30:10 SLIDINGWINDOW:4:15 AVGQUAL:20 MINLEN:100 is recommended. Note the "adapters" in this examples. This file can be named anything as longs as it specified in the parameter file. This adapter file must be in the same working directory and has to be in fasta format.|
 | stem             | The is the working directory. Note that the "stem" in the parameter file must be the directory that has your raw data.   | 
-| filenames        | This is the name of the text file including a list of all the data files to be evaluated. Note, only the foward read files should be in the list. Use "*R1*.fq.gz" as a name template. Also, note that this file must be in the stem directory.|   
-| samtools_quality      | This gives you the option to delete mapped and unmapped reads that fall below a set quaility score. It is recommended that you use 20. |
+| filenames        | This is the name of the text file including a list of all the data files to be evaluated. Note, only the foward read files should be in the list. Use ""*"R1"*".fq.gz" as a name template. Input files can be compressed. Also, note that this file must be in the stem directory.|   
+| samtools_quality | This gives you the option to delete mapped and unmapped reads that fall below a set quaility score. It is recommended that you use 20. |
 | genome_path      | This is the path to the directory where the reference genome is. This is needed for alignment. An example of this is: /home/dbs/mouse-genome/GCF_000001635.27_GRCm39_genomic.fna |
-| database_path    | This is the path to the directory where the database is. This needed for idenifying communities with KRAKEN2. An example is 64. |                                         
+| database_path    | This is the path to the directory where the database is. This needed for idenifying communities with KRAKEN2. |                                         
 
 See the sample parameter file for more examples. 
