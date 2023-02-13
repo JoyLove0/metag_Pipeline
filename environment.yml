@@ -17,4 +17,4 @@ dependencies:
   - trimmomatic=0.39=hdfd78af_2
   - yaml=0.2.5=haf1e3a3_0
   - pip:
-    - multiqc==1.0
+    - multiqc==1.14
