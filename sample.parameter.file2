@@ -2,6 +2,6 @@ threads = 24
 steps = ILLUMINACLIP:adapters:2:30:10 SLIDINGWINDOW:4:15 AVGQUAL:20 MINLEN:100
 stem = /home/Raw_Data_Directory
 filenames = sample.R1.file.names
-samtools_quaility = 20
+samtools_quality = 20
 genome_path = /home/Genome.fna
 database_path = /home/dbsl
