@@ -183,8 +183,9 @@ for line in file:
     unmapped_samtools_sort = "bwa mem -M -t %s %s %sR1%s %sR2%s | samtools view -@%s -q %s -b -f 4 -o %sunmapped%s.bam" % (threads, genome_path, a, b, a, b, threads, samtools_quality, a, b)
     subprocess.call([unmapped_samtools_sort], shell=True)
     mapped_samtools_sort = "bwa mem -M -t %s %s %sR1%s %sR2%s | samtools view -@%s -q %s -b -F 4 -o %smapped%s.bam" % (threads, genome_path, a, b, a, b, threads, samtools_quality, a, b)
+    subprocess.call([mapped_samtools_sort], shell=True)
 #This code converts the unmapped alignment files to fastqc files
-    bam_to_fastqc = "bedtools bamtofastq -i %sunmapped%s.bam -fq %sunmapped_R1%s.fq" % (a, b, a, b)
+    bam_to_fastqc = "bedtools bamtofastq -i %sunmapped%s.bam -fq %sunmapped_R1_%s -fq2 %sunmapped_R2_%s" % (a, b, a, b, a, b)
     subprocess.call([bam_to_fastqc], shell=True)
     foward_unmapped = "seqtk seq -1 %s_unmapped%s.fq > %sunmapped_R1%s.fq" % (a, b, a, b)
     subprocess.call([foward_unmapped], shell=True)
