@@ -216,5 +216,5 @@ file = open("unmapped.filenames")
 for line in file:
     a = line.split("R1")[0].strip()
     b = line.split("R1")[-1].strip()
-    kraken_cmd = "kraken2 --db %s --paired %sR1%s %sR2%s --threads %s --output %s/Kraken_Outputfile --report %s/Kraken_Report --use-name" % (database_path, a, b, a, b, threads, Kraken_dir, Kraken_dir)
+    kraken_cmd = "kraken2 --gzip-compressed --db %s --paired %sR1%s %sR2%s --threads %s --output %s/Kraken_Outputfile --report %s/Kraken_Report --use-name" % (database_path, a, b, a, b, threads, Kraken_dir, Kraken_dir)
     subprocess.check_output([kraken_cmd], shell=True)
