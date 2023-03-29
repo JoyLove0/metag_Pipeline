@@ -189,7 +189,7 @@ for line in file:
     extracting_unmappped = "samtools view -@ %s -b -f 12 -q %s %s.bam > %sunmapped_bothends.bam" % (threads, samtools_quality, a, a)
     subprocess.call([extracting_unmappped], shell=True)
 #This code converts the unmapped alignment files to fastqc files
-    samtools_sort = "samtools sort -@ %s -o %sunmapped_qsort.bam %sunmapped_bothends.bam" % (threads, a, a)
+    samtools_sort = "samtools sort -@ %s -o %sunmapped_sorted.bam %sunmapped_bothends.bam" % (threads, a, a)
     subprocess.call([samtools_sort], shell=True)
     samtools_fastq = "samtools fastq -@ %s %sunmapped_sorted.bam -1 %sunmapped_sorted_R1.fq -2 %sunmapped_sorted_R2.fq" % (threads, a, a, a)
     subprocess.call([samtools_fastq], shell=True)
