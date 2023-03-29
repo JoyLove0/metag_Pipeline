@@ -184,9 +184,9 @@ for line in file:
     subprocess.call([bwa_mem], shell=True)
     samtobam = "samtools view -S -b %s.sam > %s.bam" % (a, a)
     subprocess.call([samtobam], shell=True)
-    extracting_mapped = "samtools view -@ %s -u -F12 -q %s %s.bam > %smapped_bothends.bam" % (threads, samtools_quality, a, a)
+    extracting_mapped = "samtools view -@ %s -b -F12 -q %s %s.bam > %smapped_bothends.bam" % (threads, samtools_quality, a, a)
     subprocess.call([extracting_mapped], shell=True)
-    extracting_unmappped = "samtools view -@ %s -u -f 12 -q %s %s.bam > %sunmapped_bothends.bam" % (threads, samtools_quality, a, a)
+    extracting_unmappped = "samtools view -@ %s -b -f 12 -q %s %s.bam > %sunmapped_bothends.bam" % (threads, samtools_quality, a, a)
     subprocess.call([extracting_unmappped], shell=True)
 #This code converts the unmapped alignment files to fastqc files
     samtools_sort = "samtools sort -@ %s -o %sunmapped_qsort.bam %sunmapped_bothends.bam" % (threads, a, a)
@@ -205,6 +205,8 @@ copy_file1 = "mv *bam %s" % (Alignment_dir)
 subprocess.check_output(copy_file1, shell=True) #Moving bam files to Alignment directory
 copy_file2 = "mv *unmapped* %s" % (Alignment_dir)
 subprocess.check_output(copy_file2, shell=True) #Moving unmapped files to Alignment directory
+copy_file3 = "mv *fq %s" % (Alignment_dir)
+subprocess.check_output(copy_file3, shell=True) #Moving fq files to Alignment directory
 
 ############################ SPECIES IDENTIFICATION ###########################
 
