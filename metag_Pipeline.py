@@ -183,6 +183,7 @@ for line in file:
     bwa_mem = "bwa mem -M -t %s %s %sR1%s %sR2%s > %s.sam" % (threads, genome_path, a, b, a, b, a)
     subprocess.call([bwa_mem], shell=True)
     samtobam = "samtools view -S -b %s.sam > %s.bam" % (a, a)
+    subprocess.call([samtobam], shell=True)
     extracting_mapped = "samtools view -@ %s -u -F12 -q %s %s.bam > %smapped_bothends.bam" % (threads, samtools_quality, a, a)
     subprocess.call([extracting_mapped], shell=True)
     extracting_unmappped = "samtools view -@ %s -u -f 12 -q %s %s.bam > %sunmapped_bothends.bam" % (threads, samtools_quality, a, a)
@@ -190,14 +191,14 @@ for line in file:
 #This code converts the unmapped alignment files to fastqc files
     samtools_sort = "samtools sort -@ %s -o %sunmapped_qsort.bam %sunmapped_bothends.bam" % (threads, a, a)
     subprocess.call([samtools_sort], shell=True)
-    samtools_fastq = "samtools fastq -@ %s %sunmapped_sorted.bam -1 %sunmapped_sorted_R1.fastq.gz -2 %sunmapped_sorted_R2.fastq.gz" % (threads, a, a, a)
+    samtools_fastq = "samtools fastq -@ %s %sunmapped_sorted.bam -1 %sunmapped_sorted_R1.fq -2 %sunmapped_sorted_R2.fq" % (threads, a, a, a)
     subprocess.call([samtools_fastq], shell=True)
 
 ### Manipulating the location of unmapped files 
 #This code makes a list of unmapped files in preparation for Kraken
 os.chdir(PE) #Change the current working directory
 pwd = os.getcwd() #Get the current working directory
-make_file2 = "ls *R1.fastq.gz > unmapped.filenames" 
+make_file2 = "ls *fq > unmapped.filenames" 
 subprocess.check_output(make_file2, shell=True) #Making file from unmapped names
 #This code manipulates the location of the alignment files to Alignment directory
 copy_file1 = "mv *bam %s" % (Alignment_dir)
