@@ -198,15 +198,13 @@ for line in file:
 #This code makes a list of unmapped files in preparation for Kraken
 os.chdir(PE) #Change the current working directory
 pwd = os.getcwd() #Get the current working directory
-make_file2 = "ls *fq > unmapped.filenames" 
+make_file2 = "ls *unmapped_sorted_R1.fq  > unmapped.filenames" 
 subprocess.check_output(make_file2, shell=True) #Making file from unmapped names
 #This code manipulates the location of the alignment files to Alignment directory
 copy_file1 = "mv *bam %s" % (Alignment_dir)
 subprocess.check_output(copy_file1, shell=True) #Moving bam files to Alignment directory
 copy_file2 = "mv *unmapped* %s" % (Alignment_dir)
 subprocess.check_output(copy_file2, shell=True) #Moving unmapped files to Alignment directory
-copy_file3 = "mv *fq %s" % (Alignment_dir)
-subprocess.check_output(copy_file3, shell=True) #Moving fq files to Alignment directory
 
 ############################ SPECIES IDENTIFICATION ###########################
 
