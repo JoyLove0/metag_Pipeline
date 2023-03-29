@@ -180,16 +180,17 @@ for line in file:
     a = line.split("R1")[0].strip()
     b = line.split("R1")[-1].strip()
 #This code extracts the unmapped and mapped alignment files using samtools
-    bwa_mem = "bwa mem -M -t %s %s %sR1%s %sR2%s > %s.bam" % (threads, genome_path, a, b, a, b, a)
+    bwa_mem = "bwa mem -M -t %s %s %sR1%s %sR2%s > %s.sam" % (threads, genome_path, a, b, a, b, a)
     subprocess.call([bwa_mem], shell=True)
+    samtobam = "samtools view -S -b %s.sam > %s.bam" % (a, a)
     extracting_mapped = "samtools view -@ %s -u -F12 -q %s %s.bam > %smapped_bothends.bam" % (threads, samtools_quality, a, a)
     subprocess.call([extracting_mapped], shell=True)
     extracting_unmappped = "samtools view -@ %s -u -f 12 -q %s %s.bam > %sunmapped_bothends.bam" % (threads, samtools_quality, a, a)
     subprocess.call([extracting_unmappped], shell=True)
 #This code converts the unmapped alignment files to fastqc files
-    samtools_sort = "samtools sort -n --threads %s -o %sunmapped_qsort.bam %sunmapped_bothends.bam" % (threads, a, a)
+    samtools_sort = "samtools sort -@ %s -o %sunmapped_qsort.bam %sunmapped_bothends.bam" % (threads, a, a)
     subprocess.call([samtools_sort], shell=True)
-    samtools_fastq = "samtools fastq -@ %s %sunmapped_qsort.bam -1 %sunmapped_sorted_R1.fastq.gz -2 %sunmapped_sorted_R2.fastq.gz" % (threads, a, a, a)
+    samtools_fastq = "samtools fastq -@ %s %sunmapped_sorted.bam -1 %sunmapped_sorted_R1.fastq.gz -2 %sunmapped_sorted_R2.fastq.gz" % (threads, a, a, a)
     subprocess.call([samtools_fastq], shell=True)
 
 ### Manipulating the location of unmapped files 
@@ -216,5 +217,5 @@ file = open("unmapped.filenames")
 for line in file:
     a = line.split("R1")[0].strip()
     b = line.split("R1")[-1].strip()
-    kraken_cmd = "kraken2 --gzip-compressed --db %s --paired %sR1%s %sR2%s --threads %s --output %s/Kraken_Outputfile --report %s/Kraken_Report --use-name" % (database_path, a, b, a, b, threads, Kraken_dir, Kraken_dir)
+    kraken_cmd = "kraken2 --db %s --paired %sR1%s %sR2%s --threads %s --use-mpa-style --output %s/Kraken_Outputfile --report %s/Kraken_Report --use-name" % (database_path, a, b, a, b, threads, Kraken_dir, Kraken_dir)
     subprocess.check_output([kraken_cmd], shell=True)
