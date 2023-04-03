@@ -182,7 +182,7 @@ for line in file:
 #This code extracts the unmapped and mapped alignment files using samtools
     bwa_mem = "bwa mem -M -t %s %s %sR1%s %sR2%s > %s.sam" % (threads, genome_path, a, b, a, b, a)
     subprocess.call([bwa_mem], shell=True)
-    samtobam = "samtools view -S -b %s.sam > %s.bam" % (a, a)
+    samtobam = "samtools view -S -b -h %s.sam > %s.bam" % (a, a)
     subprocess.call([samtobam], shell=True)
     extracting_mapped = "samtools view -@ %s -b -F12 -q %s %s.bam > %smapped_bothends.bam" % (threads, samtools_quality, a, a)
     subprocess.call([extracting_mapped], shell=True)
