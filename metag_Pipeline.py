@@ -206,6 +206,7 @@ subprocess.check_output(copy_file1, shell=True) #Moving bam files to Alignment d
 copy_file2 = "mv *unmapped* %s" % (Alignment_dir)
 subprocess.check_output(copy_file2, shell=True) #Moving unmapped files to Alignment directory
 
+print("Done with Alignment")
 ############################ SPECIES IDENTIFICATION ###########################
 
 ### Identifying unmapped reads with Kraken 
@@ -220,3 +221,4 @@ for line in file:
     b = line.split("R1")[-1].strip()
     kraken_cmd = "kraken2 --db %s --paired %sR1%s %sR2%s --threads %s --use-mpa-style --output %s/Kraken_Outputfile --report %s/Kraken_Report --use-name" % (database_path, a, b, a, b, threads, Kraken_dir, Kraken_dir)
     subprocess.check_output([kraken_cmd], shell=True)
+print("Done with Species Identification")
