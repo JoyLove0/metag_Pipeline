@@ -217,8 +217,17 @@ print("Current working directory:", pwd) #Print the current working directory
 #This code identifies unmapped reads with Kraken
 file = open("unmapped.filenames")
 for line in file:
-    a = line.split("R1")[0].strip()
+     a = line.split("R1")[0].strip()
     b = line.split("R1")[-1].strip()
-    kraken_cmd = "kraken2 --db %s --paired %sR1%s %sR2%s --threads %s --use-mpa-style --output %s/Kraken_Outputfile --report %s/Kraken_Report --use-name" % (database_path, a, b, a, b, threads, Kraken_dir, Kraken_dir)
+    c = line.split("trimmed_unmapped_sorted")[0].strip()
+    kraken_cmd = "kraken2 --db %s --paired %sR1%s %sR2%s --threads %s --use-mpa-style --output %s/%sKraken_Outputfile --report %s/%sKraken_Report --use-name" % (database_path, a, b, a, b, threads, Kraken_dir, c, Kraken_dir, c)
+    print(kraken_cmd)
     subprocess.check_output([kraken_cmd], shell=True)
 print("Done with Species Identification")
+
+### Reparing for R
+#This code makes a list of kraken reports files in preparation for R
+os.chdir(Kraken_dir) #Change the current working directory
+pwd = os.getcwd() #Get the current working directory
+make_file3 = "ls *Kraken_Report  > report.filenames" 
+subprocess.check_output(make_file3, shell=True) #Making file from Kraken report names
