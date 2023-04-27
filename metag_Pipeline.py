@@ -49,6 +49,7 @@ filenames = param["filenames"]
 genome_path = param["genome_path"]
 samtools_quality = param["samtools_quality"]
 database_path = param["database_path"]
+final_output_dir = param["output_directory_name"]
 #Double check variables
 print("-------------------------------------------CHECK YOUR VARIABLES--------------------------------------------")
 print("Thread for Fastqc, Multiqc, BWA, Samtools, and Kraken:", threads,
@@ -96,6 +97,7 @@ if checkpoint[6] == True:
 elif checkpoint[6] == False:
         os.mkdir(stem + "/Alignment")
 #This code creates variables for directories
+Stem = stem
 PE = stem + "/PE"
 U = stem + "/U"
 pre_t = stem + "/Pre_Trim"
@@ -217,7 +219,7 @@ print("Current working directory:", pwd) #Print the current working directory
 #This code identifies unmapped reads with Kraken
 file = open("unmapped.filenames")
 for line in file:
-     a = line.split("R1")[0].strip()
+    a = line.split("R1")[0].strip()
     b = line.split("R1")[-1].strip()
     c = line.split("trimmed_unmapped_sorted")[0].strip()
     kraken_cmd = "kraken2 --db %s --paired %sR1%s %sR2%s --threads %s --use-mpa-style --output %s/%sKraken_Outputfile --report %s/%sKraken_Report --use-name" % (database_path, a, b, a, b, threads, Kraken_dir, c, Kraken_dir, c)
@@ -231,3 +233,34 @@ os.chdir(Kraken_dir) #Change the current working directory
 pwd = os.getcwd() #Get the current working directory
 make_file3 = "ls *Kraken_Report  > report.filenames" 
 subprocess.check_output(make_file3, shell=True) #Making file from Kraken report names
+#This code run more data proccessing on the kraken report: including making a compiled Kraken Report, Bar graphs, and Depth Graphs
+r_script_cmd = "R CMD BATCH dataproccessing.R"
+subprocess.check_output(r_script_cmd, shell=True)
+print("Done with Compiled Kraken Report and Depth Graphs")
+
+############################ CLEAN-UP ###########################
+os.chdir(Stem) 
+
+make_final = "mkdir " + final_output_dir
+mv_output1 = "mv " + Kraken_dir
+mv_output2 = "mv " +
+
+del_dir1 = "rm -r " + U
+print(del_dir1)
+subprocess.check_output(del_dir1, shell=True)
+
+del_dir2 = "rm -r " + PE
+print(del_dir2)
+subprocess.check_output(del_dir2, shell=True)
+
+del_dir3 = "rm -r " + pre_t
+print(del_dir3)
+subprocess.check_output(del_dir3, shell=True)
+
+os.chdir(Alignment_dir) #Change the current working directory
+rm_files = "rm *sam"
+rm_files2 =
+
+make_final = "mkdir " + final_output_dir
+mv_output1 = ""
+mv_output2
