@@ -238,29 +238,3 @@ r_script_cmd = "R CMD BATCH dataproccessing.R"
 subprocess.check_output(r_script_cmd, shell=True)
 print("Done with Compiled Kraken Report and Depth Graphs")
 
-############################ CLEAN-UP ###########################
-os.chdir(Stem) 
-
-make_final = "mkdir " + final_output_dir
-mv_output1 = "mv " + Kraken_dir
-mv_output2 = "mv " +
-
-del_dir1 = "rm -r " + U
-print(del_dir1)
-subprocess.check_output(del_dir1, shell=True)
-
-del_dir2 = "rm -r " + PE
-print(del_dir2)
-subprocess.check_output(del_dir2, shell=True)
-
-del_dir3 = "rm -r " + pre_t
-print(del_dir3)
-subprocess.check_output(del_dir3, shell=True)
-
-os.chdir(Alignment_dir) #Change the current working directory
-rm_files = "rm *sam"
-rm_files2 =
-
-make_final = "mkdir " + final_output_dir
-mv_output1 = ""
-mv_output2
