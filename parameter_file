@@ -5,3 +5,4 @@ filenames =
 samtools_quality =  
 genome_path = 
 database_path = 
+output_directory_name = 
