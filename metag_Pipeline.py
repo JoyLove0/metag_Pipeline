@@ -234,7 +234,7 @@ pwd = os.getcwd() #Get the current working directory
 make_file3 = "ls *Kraken_Report  > report.filenames" 
 subprocess.check_output(make_file3, shell=True) #Making file from Kraken report names
 #This code run more data proccessing on the kraken report: including making a compiled Kraken Report, Bar graphs, and Depth Graphs
-r_script_cmd = "R CMD BATCH dataproccessing.R"
+r_script_cmd = "R CMD BATCH data_proccessing.R"
 subprocess.check_output(r_script_cmd, shell=True)
 print("Done with Compiled Kraken Report and Depth Graphs")
 
