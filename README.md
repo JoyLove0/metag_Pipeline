@@ -3,7 +3,8 @@ This pipeline evaluates the quality of genomic data before and after trimming an
 
 See the figure below for a summary:
 
-![Metagenomics Pipeline (2)](https://user-images.githubusercontent.com/108104001/235510306-f6adaeae-af4a-49a4-921a-bdfa64a0c026.png)
+![Metagenomics Pipeline (3)](https://user-images.githubusercontent.com/108104001/235510791-75a25ad2-e2a7-4805-b2fe-9acfe8137e54.png)
+
 
 # Usage
 
@@ -31,8 +32,6 @@ For more information on each program, see the below:
 | Trimmomatic   | http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf                       |
 | BWA           | https://bio-bwa.sourceforge.net/bwa.shtml                                                                        |
 | samtools      | https://www.htslib.org/doc/samtools-sort.html                                                                    |
-| bedtools      | https://bedtools.readthedocs.io/_/downloads/en/stable/pdf/                                                       | 
-| seqtk         | https://github.com/lh3/seqtk or https://docs.csc.fi/apps/seqtk/#manual                                           |
 | Kraken2       | https://github.com/DerrickWood/kraken2/wiki/Manual                                                               |
 
 ### Genome Indexing
@@ -53,6 +52,7 @@ In order for this code to work this file MUST be called "parameter_file". The on
 | filenames        | This is the name of the text file including a list of all the data files to be evaluated. Note, only the foward read files should be in the list. Use \*R1\*.fq.gz" as a name template. Input files can be compressed. Also, note that this file must be in the stem directory.|   
 | samtools_quality | This gives you the option to delete mapped and unmapped reads that fall below a set quaility score. It is recommended that you use 20. |
 | genome_path      | This is the path to the directory where the reference genome is. This is needed for alignment. An example of this is: /home/dbs/mouse-genome/GCF_000001635.27_GRCm39_genomic.fna |
-| database_path    | This is the path to the directory where the database is. This needed for idenifying communities with KRAKEN2. |                                         
+| database_path    | This is the path to the directory where the database is. This needed for idenifying communities with KRAKEN2. |  
+|                  | This is the name of the directory where all the final ouput will be in. This directory should contain the directories for Kraken, Multiqc, and Alignments. |
 
 See the sample parameter file for more examples. 
