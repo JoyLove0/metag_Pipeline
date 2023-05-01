@@ -3,7 +3,7 @@ This pipeline evaluates the quality of genomic data before and after trimming an
 
 See the figure below for a summary:
 
-![Metagenomics Pipeline](https://user-images.githubusercontent.com/108104001/194805896-1e1e923c-bb15-4c56-aac0-5d702cf97b00.jpg)
+![Metagenomics Pipeline (2)](https://user-images.githubusercontent.com/108104001/235510306-f6adaeae-af4a-49a4-921a-bdfa64a0c026.png)
 
 # Usage
 
