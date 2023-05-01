@@ -5,4 +5,4 @@ filenames = sample.R1.file.names
 samtools_quality = 20
 genome_path = /home/Genome.fna
 database_path = /home/dbsl
-output_directory_name = /home/Output_Directory
+output_directory_name = Output_Directory
