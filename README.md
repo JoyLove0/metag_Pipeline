@@ -53,6 +53,6 @@ In order for this code to work this file MUST be called "parameter_file". The on
 | samtools_quality | This gives you the option to delete mapped and unmapped reads that fall below a set quaility score. It is recommended that you use 20. |
 | genome_path      | This is the path to the directory where the reference genome is. This is needed for alignment. An example of this is: /home/dbs/mouse-genome/GCF_000001635.27_GRCm39_genomic.fna |
 | database_path    | This is the path to the directory where the database is. This needed for idenifying communities with KRAKEN2. |  
-|                  | This is the name of the directory where all the final ouput will be in. This directory should contain the directories for Kraken, Multiqc, and Alignments. |
+| output_directory_name | This is the name of the directory where all the final ouput will be in. This directory should contain the directories for Kraken, Multiqc, and Alignments. |
 
 See the sample parameter file for more examples. 
