@@ -5,7 +5,6 @@
 tile : Metagenomic Pipeline
 """
 #################################### SET-UP ###################################
-
 ### Built-ins
 import subprocess
 import os
@@ -49,7 +48,7 @@ filenames = param["filenames"]
 genome_path = param["genome_path"]
 samtools_quality = param["samtools_quality"]
 database_path = param["database_path"]
-final_output_dir = param["output_directory_name"]
+output_dir_name = param["output_directory_name"]
 #Double check variables
 print("-------------------------------------------CHECK YOUR VARIABLES--------------------------------------------")
 print("Thread for Fastqc, Multiqc, BWA, Samtools, and Kraken:", threads,
@@ -58,7 +57,9 @@ print("Thread for Fastqc, Multiqc, BWA, Samtools, and Kraken:", threads,
       "Filenames:", filenames,
       "Quality for samtools", samtools_quality,
       "Pathway to Reference Genome:", genome_path,
-      "Pathway to Database:", database_path)
+      "Pathway to Database:", database_path,
+      "Output Directory Name:", output_dir_name)
+
 ## Directory Variables
 #This code creates the nessecary directories if they don't already exist
 checkpoint = (os.path.exists(stem + "/PE"),
@@ -67,7 +68,8 @@ checkpoint = (os.path.exists(stem + "/PE"),
               os.path.exists(stem + "/PE/Post_Trim"), 
               os.path.exists(stem + "/Multiqc_dir"), 
               os.path.exists(stem + "/Kraken"), 
-              os.path.exists(stem + "/Alignment"))
+              os.path.exists(stem + "/Alignment"),
+              os.path.exists(stem + "/" + output_dir_name))
 if checkpoint[0] == True:
     print("PE directory already exsists.")
 elif checkpoint[0] == False:
@@ -96,8 +98,11 @@ if checkpoint[6] == True:
         print("Alignment directory already exsists.")
 elif checkpoint[6] == False:
         os.mkdir(stem + "/Alignment")
+if checkpoint[7] == True:
+    print("The name you gave for the Output Directory already exsists.")
+elif checkpoint[7] == False:
+    os.mkdir(stem + "/" + output_dir_name)
 #This code creates variables for directories
-Stem = stem
 PE = stem + "/PE"
 U = stem + "/U"
 pre_t = stem + "/Pre_Trim"
@@ -105,19 +110,19 @@ post_t = PE + "/Post_Trim"
 Multiqc_dir = stem + "/Multiqc_dir"
 Kraken_dir = stem + "/Kraken"
 Alignment_dir = stem + "/Alignment"
+final_output_dir = stem + "/" + output_dir_name
 print("Paired-end directory:", PE, 
       "Unpaired directory:", U, 
       "Pre-Trimming directory:", pre_t, 
       "Post-Trimming:", post_t,
       "Multiqc directory", Multiqc_dir, 
       "Kraken Directory", Kraken_dir,
-      "Alignment Directory", Alignment_dir)
+      "Alignment Directory", Alignment_dir,
+      "Final Output Directory", final_output_dir)
 #This code double checks working directories
 wd = os.getcwd() #Get the current working directory
 print("Current working directory:", wd) #Print the current working directory
 print("-----------------------------------------------------------------------------------------------------------")
-
-################################### PIPELINE ##################################
 
 #Moving R scripts
 mv_R_1 = "mv data_processing.R " + Kraken_dir
@@ -126,6 +131,8 @@ print(mv_R_1)
 mv_R_2 = "mv functions.R " + Kraken_dir
 print(mv_R_2)
 #subprocess.check_output(mv_R_2, shell=True)
+
+################################### PIPELINE ##################################
 
 ################################ QUALITY CONTROL ##############################
 
