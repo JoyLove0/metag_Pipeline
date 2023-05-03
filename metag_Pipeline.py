@@ -119,6 +119,14 @@ print("-------------------------------------------------------------------------
 
 ################################### PIPELINE ##################################
 
+#Moving R scripts
+mv_R_1 = "mv data_processing.R " + Kraken_dir
+print(mv_R_1)
+#subprocess.check_output(mv_R_1, shell=True)
+mv_R_2 = "mv functions.R " + Kraken_dir
+print(mv_R_2)
+#subprocess.check_output(mv_R_2, shell=True)
+
 ################################ QUALITY CONTROL ##############################
 
 ### FASTQC before trimming 
