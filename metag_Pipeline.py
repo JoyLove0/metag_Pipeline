@@ -125,12 +125,11 @@ print("Current working directory:", wd) #Print the current working directory
 print("-----------------------------------------------------------------------------------------------------------")
 
 #Moving R scripts
+#Moving R scripts
 mv_R_1 = "mv data_processing.R " + Kraken_dir
-print(mv_R_1)
-#subprocess.check_output(mv_R_1, shell=True)
+subprocess.check_output(mv_R_1, shell=True)
 mv_R_2 = "mv functions.R " + Kraken_dir
-print(mv_R_2)
-#subprocess.check_output(mv_R_2, shell=True)
+subprocess.check_output(mv_R_2, shell=True)
 
 ################################### PIPELINE ##################################
 
