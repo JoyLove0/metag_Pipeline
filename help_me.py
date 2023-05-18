@@ -20,9 +20,6 @@ def help_me():
     print("[9] KRAKEN2")
     print("[0] EXIT HELP MENU.")
     
-def shit():
-    print("I guess it works")
-    
 ###########################################################################
     
 while True:
