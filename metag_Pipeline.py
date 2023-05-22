@@ -124,14 +124,12 @@ wd = os.getcwd() #Get the current working directory
 print("Current working directory:", wd) #Print the current working directory
 print("-----------------------------------------------------------------------------------------------------------")
 
-#Moving R scripts
+################################### PIPELINE ##################################
 #Moving R scripts
 mv_R_1 = "mv data_processing.R " + Kraken_dir
 subprocess.check_output(mv_R_1, shell=True)
 mv_R_2 = "mv functions.R " + Kraken_dir
 subprocess.check_output(mv_R_2, shell=True)
-
-################################### PIPELINE ##################################
 
 ################################ QUALITY CONTROL ##############################
 
@@ -251,4 +249,6 @@ subprocess.check_output(make_file3, shell=True) #Making file from Kraken report 
 r_script_cmd = "R CMD BATCH data_processing.R"
 subprocess.check_output(r_script_cmd, shell=True)
 print("Done with Compiled Kraken Report and Depth Graphs")
+
+### Clean-Up
 
