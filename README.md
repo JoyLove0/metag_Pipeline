@@ -11,12 +11,13 @@ See the figure below for a summary:
 `python metag_Pipeline.py`
 
 # Included Tools and Packages
-This tool comes in four parts: 
+This tool comes in several parts: 
 1. metag_Pipeline.py 
 2. help_me.py
 3. parameter_file
 4. sample.parameter.file
 5. environment.yml
+6. R scripts for further data processing
  
 # Dependecies
 This pipeline requires Python, FASTQC, Trimmomatic, bwa, samtools, bedtools, seqtk, and kraken2 to be installed in order to run. The environment.yml file contains the conda environment recipe that includes these programs. The help_me.py file contain the option and/or of these programs.
@@ -33,6 +34,7 @@ For more information on each program, see the below:
 | BWA           | https://bio-bwa.sourceforge.net/bwa.shtml                                                                        |
 | samtools      | https://www.htslib.org/doc/samtools-sort.html                                                                    |
 | Kraken2       | https://github.com/DerrickWood/kraken2/wiki/Manual                                                               |
+| R             | https://cran.r-project.org/manuals.html.                                                                         |
 
 ### Genome Indexing
 Important: the user must index the reference genome before running metag_Pipeline.py. This will take several hour. Use the command below. 
@@ -56,3 +58,10 @@ In order for this code to work this file MUST be called "parameter_file". The on
 | output_directory_name | This is the name of the directory where all the final ouput will be in. This directory should contain the directories for Kraken, Multiqc, and Alignments. |
 
 See the sample parameter file for more examples. 
+
+### Addition Data Processing using R script Provided
+Note that the R script that are provided were created using R version 4.1.2. 
+
+While the Kraken report are very useful, there are several more ways to make the information more accessible. The R scripts provided will make a compiled chart of the Kraken reports of all of your samples, a depth bar graph, and Rarifaction curves. The latter two will be generated as pdf documnets. The complied kraken report will be generated as a csv document that can be opened in excel. 
+
+In order for the R scripts to run properly, the file data_processing.R and the function.R must both be dowloaded in the Kraken directory. 
