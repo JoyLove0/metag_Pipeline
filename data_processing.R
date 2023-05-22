@@ -25,16 +25,18 @@ if (length(data.df.ls[[1]]) > length(data.df.ls[[2]])) {
   rnms.vt <- c(row.names(data.df.ls[[2]]), row.names(data.df.ls[[1]])[match.vt == FALSE])
 }
 
-for (i in 3:length(data.df.ls)) {
-  if (length(rnms.vt) > length(data.df.ls[[i]])) {
-    match.vt <- row.names(data.df.ls[[i]]) %in% rnms.vt
-    rnms.vt <- c(rnms.vt, row.names(data.df.ls[[i]])[match.vt == FALSE])
-  } else {
-    match.vt <- rnms.vt %in% row.names(data.df.ls[[i]])
-    rnms.vt <- c(row.names(data.df.ls[[i]]), rnms.vt[match.vt == FALSE])
+if(length(data.df.ls)>3){
+  for (i in 3:length(data.df.ls)) {
+    if (length(rnms.vt) > length(data.df.ls[[i]])) {
+      match.vt <- row.names(data.df.ls[[i]]) %in% rnms.vt
+      rnms.vt <- c(rnms.vt, row.names(data.df.ls[[i]])[match.vt == FALSE])
+    } else {
+      match.vt <- rnms.vt %in% row.names(data.df.ls[[i]])
+      rnms.vt <- c(row.names(data.df.ls[[i]]), rnms.vt[match.vt == FALSE])
+    }
   }
 }
-
+  
 taxa.df <- data.frame(matrix(nrow = length(rnms.vt), ncol = 8))
 rownames(taxa.df) <- rnms.vt
 colnames(taxa.df) <- c("domain", "kingdom", "phylum", "order", "class", "family", "genus", "species")
