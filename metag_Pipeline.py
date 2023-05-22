@@ -233,3 +233,42 @@ for line in file:
     print(kraken_cmd)
     subprocess.check_output([kraken_cmd], shell=True)
 print("Done with Species Identification")
+
+################################### CLEAN UP ##################################
+### Cleaning Output Directories
+os.chdir(Multiqc_dir) #Change the current working directory
+pwd = os.getcwd() #Get the current working directory
+#This code removes unneeded file from the Mutliqc directory 
+rm_files1 = "rm -r *report_data"
+subprocess.check_output(rm_files1, shell=True) #Keeps the html files only
+#This code removes unneeded file from the ALignment directory
+os.chdir(Alignment_dir) #Change the current working directory
+pwd = os.getcwd() #Get the current working directory
+rm_files2 = "rm unmapped.filenames"
+subprocess.check_output(rm_files2, shell=True)
+rm_files3 = "rm *trimmed_.bam"
+subprocess.check_output(rm_files3, shell=True)
+rm_files4 = "rm *unmapped_bothends.bam"
+subprocess.check_output(rm_files4, shell=True)
+rm_files5 ="rm *unmapped_sorted.bam"
+subprocess.check_output(rm_files5, shell=True)
+
+#This code puts the user in the stem directory 
+os.chdir(stem) #Change the current working directory
+pwd = os.getcwd() #Get the current working directory
+print(pwd)
+#Removing directories no longers needed by user
+del_dir1 = "rm -r " + U
+subprocess.check_output(del_dir1, shell=True) #Removing unpaired directory
+del_dir2 = "rm -r " + PE
+subprocess.check_output(del_dir2, shell=True) #Removing paired end directory 
+del_dir3 = "rm -r " + pre_t
+subprocess.check_output(del_dir3, shell=True) #Removing pre-trimmed directory
+
+#Moving cleaned directories to final output directory
+mv_output1 = "mv " + Kraken_dir + " " + final_output_dir
+subprocess.check_output(mv_output1, shell=True) #Moving Kraken directory to final output
+mv_output2 = "mv " + Multiqc_dir + " " + final_output_dir
+subprocess.check_output(mv_output2, shell=True) #Moving Multiqc directory to final output 
+mv_output3 = "mv " + Alignment_dir + " " + final_output_dir
+subprocess.check_output(mv_output3, shell=True) #Moving Alignment directory to final output 
