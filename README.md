@@ -59,7 +59,7 @@ In order for this code to work this file MUST be called "parameter_file". The on
 
 See the sample parameter file for more examples. 
 
-### Addition Data Processing using R script Provided
+# Addition Data Processing using R script Provided
 Note that the R script that are provided were created using R version 4.1.2. 
 
 While the Kraken report are very useful, there are several more ways to make the information more accessible. The R scripts provided will make a compiled chart of the Kraken reports of all of your samples, a depth bar graph, and Rarifaction curves. The latter two will be generated as pdf documnets. The complied kraken report will be generated as a csv document that can be opened in excel. 
