@@ -125,11 +125,6 @@ print("Current working directory:", wd) #Print the current working directory
 print("-----------------------------------------------------------------------------------------------------------")
 
 ################################### PIPELINE ##################################
-#Moving R scripts
-mv_R_1 = "mv data_processing.R " + Kraken_dir
-subprocess.check_output(mv_R_1, shell=True)
-mv_R_2 = "mv functions.R " + Kraken_dir
-subprocess.check_output(mv_R_2, shell=True)
 
 ################################ QUALITY CONTROL ##############################
 
@@ -238,17 +233,3 @@ for line in file:
     print(kraken_cmd)
     subprocess.check_output([kraken_cmd], shell=True)
 print("Done with Species Identification")
-
-### Reparing for R
-#This code makes a list of kraken reports files in preparation for R
-os.chdir(Kraken_dir) #Change the current working directory
-pwd = os.getcwd() #Get the current working directory
-make_file3 = "ls *Kraken_Report  > report.filenames" 
-subprocess.check_output(make_file3, shell=True) #Making file from Kraken report names
-#This code run more data proccessing on the kraken report: including making a compiled Kraken Report, Bar graphs, and Depth Graphs
-r_script_cmd = "R CMD BATCH data_processing.R"
-subprocess.check_output(r_script_cmd, shell=True)
-print("Done with Compiled Kraken Report and Depth Graphs")
-
-### Clean-Up
-
