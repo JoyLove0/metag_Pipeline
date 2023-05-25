@@ -1,5 +1,5 @@
 # metag_Pipeline
-This pipeline evaluates the quality of genomic data before and after trimming and aligns the quality data to a target genome. The reads that don't align to the target undergo metagenomic analysis that identify the unmapped communities. Within the pipeline, several programs are used and therefore must be preloaded for the code to work. The programs used include: FastQC, MultiQC, Trimmomatic, Burrows-Wheeler Aligner (BWA), samtools, bedtools, seqtk, and Kraken2.
+This pipeline evaluates the quality of genomic data before and after trimming and aligns the quality data to a target genome. The reads that don't align to the target undergo metagenomic analysis that identify the unmapped communities. Within the pipeline, several programs are used and therefore must be preloaded for the code to work. The programs used include: FastQC, MultiQC, Trimmomatic, Burrows-Wheeler Aligner (BWA), samtools, bedtools, seqtk, Kraken2, and R.
 
 See the figure below for a summary:
 
