@@ -24,9 +24,9 @@ This pipeline requires Python, FASTQC, Trimmomatic, bwa, samtools, bedtools, seq
 
 Note that this pipeline was written in the Python version 3.6.10. For for more information about the versions of all of these dependecies check the environment.yml.
 
-For more information on each program, see the below:
+For more information on each program, see below:
 
-| Program       | Manuel and/or Useful Link   |
+| Program       | Manuals and/or Useful Links   |
 | ------------- | ------------- |
 | FastQC        | https://www.bioinformatics.babraham.ac.uk/projects/fastqc/ or https://dnacore.missouri.edu/PDF/FastQC_Manual.pdf |
 | MultiQC       | https://multiqc.info/docs/                                                                                       |
